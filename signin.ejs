@@ -1,0 +1,138 @@
+<div class="container py-5 h-100 form-popup"  id="myForm">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="bg-dark text-white">
+          <button type="button" onclick="closeForm()" class="btn-close bt1" aria-label="Close"></button>
+          <div class="card-body p-5 text-center">
+              
+            <div class="mb-md-5 mt-md-4 pb-5">
+              
+              <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
+          
+
+              <div id="login_alert_response"></div>
+
+              <form id="login-form" method="POST">
+              <div class="form-outline form-white mb-4">
+                  <label class="form-label" for="typeEmailX">Email</label>
+                <input type="email"  id="email-input" name="email" class="form-control form-control-lg" />
+                
+              </div>
+
+              <div class="form-outline form-white mb-4" id="passwordgroup">
+                  <label class="form-label" for="typePasswordX">Password</label>
+                <input type="password" id="password-input" name="password" class="form-control form-control-lg" />
+                
+              </div>
+
+              <p class="small mb-12 pb-lg-2"><a class="text-white-50" href="#" id="forgetpass">Forgot password?</a></p>
+
+              <button class="btn btn-outline-light btn-lg px-5" type="submit" id="loginbtn">Login</button>
+              <div id="send_email_group" style="display: inline-block; display: none;">
+                <button class="btn btn-outline-light btn-lg px-5" type="button" id="back" >Back</button>
+                <button class="btn btn-outline-light btn-lg px-5" type="button" id="send_email" >Reset</button>  
+              </div>
+             
+              </form>
+
+              <hr>
+
+              <a  href="/auth/google" style="text-decoration: none;" id="googlebtn" class="login-with-google-btn" >
+                Continue with Google
+              </a>
+
+            </div>
+
+            <div id="signupgroup">
+              <p class="mb-0">Don't have an account? <a href="signup" class="text-white-50 fw-bold">Sign Up</a>
+              </p>
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <script>
+    function openForm() {
+        document.getElementById("myForm").style.display = "block";
+      }
+      function closeForm() {
+document.getElementById("myForm").style.display = "none";
+}
+
+
+
+$(document).ready(function() {
+  $('#forgetpass').click(function(){
+    $("#passwordgroup").hide(1000)
+    $("#googlebtn").hide(1000)
+    $("#signupgroup").hide(1000)
+    $("#loginbtn").hide(1000)
+    $("#send_email_group").show(1000)
+    $("#forgetpass").hide(1000)
+    const email = $('#email-input').val();
+
+  })
+
+
+  $('#send_email').click(function(){
+    $.ajax({
+      method:'POST',
+      url:'/forget_password_verify_email',
+      data:{email:$("#email-input").val()},
+      success: function(result){
+        document.getElementById("login_alert_response").innerHTML = "<div class='alert alert-success alert-dismissible fade show' role='alert'>"+result.msg+"<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
+        setTimeout(() => {
+					location.reload();
+			},2000)      
+      },
+      error: function(xhr){
+        const error = JSON.parse(xhr.responseText);
+        document.getElementById("login_alert_response").innerHTML = "<div class='alert alert-danger alert-dismissible fade show' role='alert'>"+error+"<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
+      }
+    })
+  })
+
+
+
+  $('#login-form').submit(function(event) {
+    event.preventDefault();
+    const email = $('#email-input').val();
+    const password = $('#password-input').val();
+    $.ajax({
+      method: 'POST',
+      url: '/login',
+      data: { email: email, password: password },
+      success: function(result) {
+        if(result === "Logged in successfully"){
+            document.getElementById("login_alert_response").innerHTML = "<div class='alert alert-success alert-dismissible fade show' role='alert'>"+result+"<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
+
+            setTimeout(() => {
+					location.reload();
+			},2000)
+
+        }
+        else{
+            document.getElementById("login_alert_response").innerHTML = "<div class='alert alert-danger alert-dismissible fade show' role='alert'>"+result+"<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
+    
+        }
+        //window.location.href = '/';
+      },
+      error: function(xhr) {
+        const error = JSON.parse(xhr.responseText);
+    
+        document.getElementById("login_alert_response").innerHTML = "<div class='alert alert-danger alert-dismissible fade show' role='alert'>"+error+"<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
+    
+      }
+    });
+  });
+});
+
+
+    </script>
+

@@ -1,0 +1,32 @@
+//LoadingManager. Handles and keeps track of loaded and pending data.
+const LoadingManager = new THREE.LoadingManager();
+
+var enableClick = false;
+
+
+
+LoadingManager.onProgress = function(){
+	
+	console.log("Onprogress Loading");
+	$(".onload").show();
+	$("#info").hide();
+	$("#navbar").hide();
+	$("#target_point").hide();
+	document.body.style.pointerEvents = "none";
+
+	
+
+	
+}
+
+LoadingManager.onLoad = function(){
+	
+	console.log("onLoad Loading");
+	$(".onload").hide();
+
+	document.body.style.pointerEvents = "auto";
+	enableClick = true;
+}
+
+const loader = new GLTFLoader(LoadingManager);
+

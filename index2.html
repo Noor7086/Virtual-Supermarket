@@ -1,0 +1,174 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CRUD Example</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="/crud.js"></script>
+</head>
+<body>
+  <h1>CRUD Example</h1>
+
+  <h2>Add Record</h2>
+
+  <img src="/images/logo.jpg" style="width:100%">
+
+  <form id="add-record-form">
+    <label for="name-input">Name:</label>
+    <input type="text" id="name-input" name="name">
+<br>
+<label for="email-input">Email:</label>
+<input type="email" id="email-input" name="email">
+<br>
+<button type="submit">Add</button>
+  </form>
+  <h2>Records</h2>
+  <table id="records-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+  <div id="edit-record-modal" style="display: none;">
+    <h2>Edit Record</h2>
+    <form id="edit-record-form">
+      <input type="hidden" id="edit-record-id" name="id">
+      <label for="edit-record-name-input">Name:</label>
+      <input type="text" id="edit-record-name-input" name="name">
+      <br>
+      <label for="edit-record-email-input">Email:</label>
+      <input type="email" id="edit-record-email-input" name="email">
+      <br>
+      <button type="submit">Save</button>
+      <button id="cancel-edit-record-button" type="button">Cancel</button>
+    </form>
+  </div>
+  <script>
+    $(document).ready(function() {
+      // Retrieve records and populate table
+      $.ajax({
+        method: 'GET',
+        url: '/records',
+        success: function(data) {
+          data.forEach(function(record) {
+            addRecordToTable(record);
+          });
+        }
+      });
+
+      // Add record
+      $('#add-record-form').submit(function(event) {
+        event.preventDefault();
+        const name = $('#name-input').val();
+        const email = $('#email-input').val();
+        $.ajax({
+          method: 'POST',
+          url: '/records',
+          data: { name: name, email: email },
+          success: function(id) {
+            const record = { id: id, name: name, email: email };
+            addRecordToTable(record);
+            $('#name-input').val('');
+            $('#email-input').val('');
+          }
+        });
+      });
+
+      // Edit record
+      $('#records-table').on('click', '.edit-record-button', function() {
+        const id = $(this).data('id');
+        const name = $(this).data('name');
+        const email = $(this).data('email');
+        $('#edit-record-id').val(id);
+        $('#edit-record-name-input').val(name);
+        $('#edit-record-email-input').val(email);
+        $('#edit-record-modal').show();
+      });
+
+      $('#edit-record-form').submit(function(event) {
+        event.preventDefault();
+        const id = $('#edit-record-id').val();
+        const name = $('#edit-record-name-input').val();
+        const email = $('#edit-record-email-input').val();
+        $.ajax({
+          method: 'POST',
+          url: '/records/' + id,
+          data: { name: name, email: email },
+          success: function(numChanged) {
+            if (numChanged > 0) {
+              updateRecordInTable(id, name, email);
+              loadTableData()
+              $('#edit-record-modal').hide();
+            }
+          }
+        });
+      });
+
+      $('#cancel-edit-record-button').click(function() {
+        $('#edit-record-modal').hide();
+      });
+
+      // Delete record
+      $('#records-table').on('click', '.delete-record-button', function() {
+        const id = $(this).data('id');
+        $.ajax({
+          method: 'POST',
+          url: '/records/' + id + '/delete',
+      success: function(numDeleted) {
+        if (numDeleted > 0) {
+          deleteRecordFromTable(id);
+          loadTableData();
+        }
+
+      }
+    });
+  });
+
+  // Functions to update table
+  function addRecordToTable(record) {
+    const row = '<tr>' +
+      '<td>' + record.id + '</td>' +
+      '<td>' + record.name + '</td>' +
+      '<td>' + record.email + '</td>' +
+      '<td>' +
+        '<button class="edit-record-button" data-id="' + record.id + '" data-name="' + record.name + '" data-email="' + record.email + '">Edit</button>' +
+        '<button class="delete-record-button" data-id="' + record.id + '">Delete</button>' +
+      '</td>' +
+    '</tr>';
+    $('#records-table tbody').append(row);
+  }
+
+  function updateRecordInTable(id, name, email) {
+    const row = $('#records-table tbody').find('tr[data-id="' + id + '"]');
+    row.find('td:nth-child(2)').text(name);
+    row.find('td:nth-child(3)').text(email);
+  }
+
+  function deleteRecordFromTable(id) {
+    $('#records-table tbody').find('tr[data-id="' + id + '"]').remove();
+  }
+
+
+  function loadTableData() {
+  // Send GET request to server to fetch records
+  $.get('/records', function(records) {
+    // Clear existing table rows
+    $('#records-table tbody').empty();
+    // Add each record to the table
+    records.forEach(function(record) {
+      addRecordToTable(record);
+    });
+  });
+}
+
+
+});
+  </script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+// custom global variables
+var video, videoImage, videoImageContext, videoTexture;
+
+// create the video element
+video = document.getElementById( 'myVideo' );
+
+// set the canvas size to match the video
+var canvasWidth = video.videoWidth || 640;
+var canvasHeight = video.videoHeight || 360;
+
+videoImage = document.createElement( 'canvas' );
+videoImage.width = canvasWidth;
+videoImage.height = canvasHeight;
+
+videoImageContext = videoImage.getContext( '2d' );
+// background color if no video present
+videoImageContext.fillStyle = '#000000';
+videoImageContext.fillRect( 0, 0, videoImage.width, videoImage.height );
+
+videoTexture = new THREE.Texture( videoImage );
+videoTexture.minFilter = THREE.LinearFilter;
+videoTexture.magFilter = THREE.LinearFilter;
+
+var movieMaterial = new THREE.MeshBasicMaterial( { map: videoTexture, overdraw: true, side:THREE.DoubleSide } );
+// the geometry on which the movie will be displayed;
+// movie image will be scaled to fit these dimensions.
+
+var movieGeometry1 = new THREE.PlaneGeometry( 7, 3, 3, 3 );
+
+var movieScreen = new THREE.Mesh( movieGeometry1, movieMaterial );
+movieScreen.position.set(18.5,2.8,1.15);
+movieScreen.rotateY(300);
+scene.add(movieScreen);
+
+video.play();
+video.loop = true;
+
+
+
+
+
+// custom global variables
+var video2, videoImage2, videoImageContext2, videoTexture2;
+
+// create the video element
+video2 = document.getElementById( 'myVideo2' );
+
+// set the canvas size to match the video
+var canvasWidth2 = video2.videoWidth || 640;
+var canvasHeight2 = video2.videoHeight || 360;
+
+videoImage2 = document.createElement( 'canvas' );
+videoImage2.width = canvasWidth2;
+videoImage2.height = canvasHeight2;
+
+videoImageContext2 = videoImage2.getContext( '2d' );
+// background color if no video present
+videoImageContext2.fillStyle = '#000000';
+videoImageContext2.fillRect( 0, 0, videoImage2.width, videoImage2.height );
+
+videoTexture2 = new THREE.Texture( videoImage2 );
+videoTexture2.minFilter = THREE.LinearFilter;
+videoTexture2.magFilter = THREE.LinearFilter;
+
+var movieMaterial2 = new THREE.MeshBasicMaterial( { map: videoTexture2, overdraw: true, side:THREE.DoubleSide } );
+// the geometry on which the movie will be displayed;
+// movie image will be scaled to fit these dimensions.
+
+
+	var movieGeometry2 = new THREE.PlaneGeometry( 2, 1, 3, 3 );
+	var movieScreen3 = new THREE.Mesh( movieGeometry2, movieMaterial2 );
+	movieScreen3.position.set(-8.5,4.3,18.6);
+	scene.add(movieScreen3);
+
+	video2.play();
+	video2.loop = true;
+
+
+
+
+
+
+	
+// custom global variables
+var video3, videoImage3, videoImageContext3, videoTexture3;
+
+// create the video element
+video3 = document.getElementById( 'myVideo3' );
+
+// set the canvas size to match the video
+var canvasWidth3 = video3.videoWidth || 640;
+var canvasHeight3 = video3.videoHeight || 360;
+
+videoImage3 = document.createElement( 'canvas' );
+videoImage3.width = canvasWidth3;
+videoImage3.height = canvasHeight3;
+
+videoImageContext3 = videoImage3.getContext( '2d' );
+// background color if no video present
+videoImageContext3.fillStyle = '#000000';
+videoImageContext3.fillRect( 0, 0, videoImage3.width, videoImage3.height );
+
+videoTexture3 = new THREE.Texture( videoImage3 );
+videoTexture3.minFilter = THREE.LinearFilter;
+videoTexture3.magFilter = THREE.LinearFilter;
+
+var movieMaterial3 = new THREE.MeshBasicMaterial( { map: videoTexture3, overdraw: true, side:THREE.DoubleSide } );
+// the geometry on which the movie will be displayed;
+// movie image will be scaled to fit these dimensions.
+
+
+
+	var movieGeometry3 = new THREE.PlaneGeometry( 2, 1, 3, 3 );
+	var movieScreen4 = new THREE.Mesh( movieGeometry3, movieMaterial3 );
+	movieScreen4.position.set(-7.4,4.3,-12.4);
+	scene.add(movieScreen4);
+
+	video3.play();
+	video3.loop = true;

@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>VSM</title>
+		<meta charset=utf-8 />
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link type="text/css" rel="stylesheet" href="main.css">
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.min.js"></script>
+
+
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
+
+		
+
+		<script type="importmap">
+			{
+			  "imports": {
+				"three": "/build/three.module.js"
+			  }
+			}
+		  </script>
+		  
+		
+
+
+        <link  rel="stylesheet" href="css/Style.css">
+
+
+
+	</head>
+	<body class="w3-black" >
+
+	<div class="onload" style="display: none">
+		<div class="loading">
+  <div class="loading-text">
+    <span class="loading-text-words">L</span>
+    <span class="loading-text-words">O</span>
+    <span class="loading-text-words">A</span>
+    <span class="loading-text-words">D</span>
+    <span class="loading-text-words">I</span>
+    <span class="loading-text-words">N</span>
+    <span class="loading-text-words">G</span>
+  </div>
+
+</div>
+
+		
+
+		
+	</div>
+	
+
+
+		<div id="info">
+		
+
+			<!-- Icon Bar (Sidebar - hidden on small screens) -->
+	
+			<!-- Page Content -->
+			<div class="w3-padding-large" id="main" >
+			  <!-- Header/Home -->
+			  <header class="w3-container w3-padding-32 w3-center"  id="home">
+				
+				
+			  
+			
+			
+		
+			 
+			
+		
+			<!-- END PAGE CONTENT -->
+			</div>
+
+			</header>
+	
+
+
+		</div>
+
+
+
+
+
+
+
+
+
+		
+
+
+
+	
+
+	
+		
+	 <video id="myVideo" autoplay muted style="display:none;">
+		<source src="<%= advertise_videos.video1_path %>" type='video/ogg; codecs="theora, vorbis"'>
+	</video>
+
+	<video id="myVideo2" autoplay muted style="display:none;">
+		<source src="<%= advertise_videos.video2_path %>" type='video/ogg; codecs="theora, vorbis"'>
+	</video>
+
+	<video id="myVideo3" autoplay muted style="display:none;">
+		<source src="<%= advertise_videos.video3_path %>" type='video/ogg; codecs="theora, vorbis"'>
+	</video>
+
+
+	
+
+
+
+  <center>
+<h1 id="target_point">.</h1>
+</center>
+
+<!--Navbar start-->
+
+<nav id="navbar" style="display: none;" class="navbar navbar-expand-lg navbar-dark bg-dark">
+	<div class="container-fluid">
+	  <a class="navbar-brand" href="#"><img src="images/logo2.jpg" style="width:60px" height="50px"></a>
+	  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	  </button>
+	  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+		<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+		  <li class="nav-item dropdown">
+			<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+			  Category
+			</a>
+			<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+			  <li><a class="dropdown-item" id="shan_category" href="#">Shan</a></li>
+			  <li><a class="dropdown-item" id="peek_freans_category" href="#">Peek freans</a></li>
+			  <li><a class="dropdown-item" id="chocolate_category" href="#">Chocolates</a></li>
+			  <li><a class="dropdown-item" id="rafhan_category" href="#">Rafhan</a></li>
+			  <li><a class="dropdown-item" id="knor_category" href="#">Knor</a></li>
+			  <li><a class="dropdown-item" id="lays_category" href="#">Lays</a></li>
+			  <li><a class="dropdown-item" id="drinks_category" href="#">Drinks</a></li>
+			</ul>
+		  </li>
+		  <li class="nav-item">
+			<a class="nav-link" id="exit_btn" href="/">Exit</a>
+		  </li>
+		</ul>
+		<form class="d-flex">
+		  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+			
+		  </ul>
+		</form>
+	  </div>
+	  
+	</div>
+  </nav>
+  
+<!--Navbar End-->
+
+  
+
+
+			<!--Display Product Discription start-->
+
+			<main id="product_detail_view"  style="display: none;"  class="card">
+				<div id="add_item_msg" ></div>
+				<picture class="card__img__container">
+				  <source media="(min-width:600px)" height="200px" id="item-img1" srcset="">
+				  <source media="(min-width:0px)" height="200px" id="item-img2" srcset="">
+				  <img class="card__img" height="200px" id="item-img3" src="" alt="product image Gabrielle Essence Eau De Parfum">
+				</picture>
+				<div class="card__content">
+				  <span class="item-tag"></span>
+				  <h1 class="item-name" id="item-name"> </h1>
+				  <p class="item-desc" id="item-desc"></p>
+				  <small class="item-desc" id="item-qty"></small>
+				  <div class="item-price">
+					<span class="price--discount" id="item-price"></span>
+				  </div>
+				  <input type="number" min="1"  value="1" class="form-control" id="select_no_of_item" placeholder="No. of Item">
+				  <button class="btn btn-dark" id="add_item_to_cart_btn">
+					<img class="cta-icon" src="https://kellychi22.github.io/frontend-mentor-solutions/01-product-preview-card-component/images/icon-cart.svg" alt="cart icon">
+					<span>Add to Cart</span>
+				  </button>
+				</div>
+			  </main>
+			  
+
+			  
+			  <!--Display Product Discription end-->
+
+
+
+			<div id="container1">
+
+			</div>
+
+
+				  <!--Cart start-->
+
+				  
+<div class="cart" id="mycartinfo">
+  <div class="cart-header">
+    <h3>Shopping Cart</h3>
+  </div>
+  <hr>
+  <div class="cart-items" id="cart_items">
+
+
+   
+
+
+    
+  </div>
+  <div class="cart-footer">
+    <div class="cart-total">
+      <span>Total:</span>
+      <span class="total-price"  id="total_price"></span>
+    </div>
+    <a style="text-decoration: none;color: white;" href="view_cart" class="checkout-btn">Checkout</a>
+  </div>
+</div>
+
+
+
+
+				  <!--Cart End-->
+
+
+
+
+		<!-- Import maps polyfill -->
+		<!-- Remove this when import maps will be widely supported -->
+		<script async src="https://unpkg.com/es-module-shims@1.3.6/dist/es-module-shims.js"></script>
+
+	
+		
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+
+
+<!-- Add this script after the body tag or at the end of your HTML document -->
+<script>
+	document.addEventListener("DOMContentLoaded", function() {
+	  // Initialize the Bootstrap dropdown
+	  var dropdownToggleList = [].slice.call(document.querySelectorAll('[data-bs-toggle="dropdown"]'));
+	  dropdownToggleList.forEach(function (dropdownToggle) {
+		new bootstrap.Dropdown(dropdownToggle);
+	  });
+	});
+  </script>
+
+
+<script>
+
+
+
+window.addEventListener('wheel', function(event)
+{
+ if (event.deltaY < 0)
+ {
+	var objDiv = document.getElementById("cart_items");
+			objDiv.scrollTop = 0;
+ }
+ else if (event.deltaY > 0)
+ {
+	var objDiv = document.getElementById("cart_items");
+			objDiv.scrollTop = objDiv.scrollHeight;
+ }
+});
+
+
+</script>
+
+
+<script type="module">
+	import * as THREE from '/build/three.module.js';
+	import { GLTFLoader } from '/jsm/loaders/GLTFLoader.js';
+	import { Octree } from '/jsm/math/Octree.js';
+	import { Capsule } from '/jsm/math/Capsule.js';
+	
+	var raycaster,arrow;
+	var no_of_item,selected_item_id,selected_item_price,selected_item_name;
+	var total_amount_before_discount = 0;
+	//Clock. Object for keeping track of time. This uses performance.now if it is available,
+	const clock = new THREE.Clock();
+	
+	show_cart();
+	
+	<%- include('loader/loading_item.ejs') %>
+	
+	
+	const scene = new THREE.Scene();
+	scene.background = new THREE.Color(0x88ccee);
+	
+	
+	
+	
+	
+	
+	const camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.1, 1000);
+	camera.rotation.order = 'YXZ';
+	
+	
+	//Camera Location
+	camera.position.set(-60, 2.5, -50.5); // Set position like this
+	
+	var vc = new THREE.Vector3(30, 0, 10);
+	camera.lookAt(vc);
+	
+	
+	////////////////////////////////////
+	raycaster = new THREE.Raycaster(
+		camera.getWorldPosition(new THREE.Vector3()),
+		camera.getWorldDirection(new THREE.Vector3())
+	  );
+	
+	
+	
+	  arrow = new THREE.ArrowHelper(
+		camera.getWorldDirection(new THREE.Vector3()),
+		camera.getWorldPosition(new THREE.Vector3()),
+		3,
+		0x000000
+	  );
+	
+	  
+	////////////////////////////////////
+	<%- include('lights_components/load_lights.ejs') %>
+	
+	// market
+	const container = document.getElementById('container1');
+	
+	//WebGl
+	const renderer = new THREE.WebGLRenderer({ antialias: true });
+	renderer.setPixelRatio(window.devicePixelRatio);
+	renderer.setSize(window.innerWidth, window.innerHeight);
+	renderer.shadowMap.enabled = true;
+	renderer.shadowMap.type = THREE.VSMShadowMap;
+	renderer.outputEncoding = THREE.sRGBEncoding;
+	renderer.toneMapping = THREE.ACESFilmicToneMapping;
+	container.appendChild(renderer.domElement);
+	
+	
+	const GRAVITY = 30;
+	
+	
+	const STEPS_PER_FRAME = 5;
+	
+	
+	const spheres = [];
+	
+	
+	const worldOctree = new Octree();
+	
+	//Position Change from by change x parameters of vectors
+	const playerCollider = new Capsule(new THREE.Vector3(10, 0.35, 0), new THREE.Vector3(10, 1, 0), 0.35);
+	
+	const playerVelocity = new THREE.Vector3();
+	const playerDirection = new THREE.Vector3();
+	
+	let playerOnFloor = false;
+	
+	
+	const keyStates = {};
+	
+	const vector1 = new THREE.Vector3();
+	const vector2 = new THREE.Vector3();
+	const vector3 = new THREE.Vector3();
+	
+	
+	
+	document.addEventListener('keydown', (event) => {
+	
+		keyStates[event.code] = true;
+	
+	});
+	
+	
+	
+	document.addEventListener('keyup', (event) => {
+	
+		keyStates[event.code] = false;
+	
+	});
+	
+	//container.addEventListener('mousedown', () => {
+	
+		//document.body.requestPointerLock();
+		//mouseTime = performance.now();
+		
+	
+	//});
+	
+	<%- include('glft_components/item_click.ejs') %>
+	
+	
+	
+	
+	document.getElementById("container1").addEventListener("click",function(){
+		document.body.requestPointerLock();
+		$("#mycartinfo").show();
+		$("#target_point").show();
+		
+		$("#navbar").hide();
+		$("#product_detail_view").hide();
+		
+	
+	});
+	
+	document.getElementById("exit_btn").addEventListener("click",function(){
+	
+		document.exitPointerLock();
+		$("#info").show();
+		$("#mycartinfo").hide();
+		$('#target_point').hide();
+	});
+	
+	
+	
+	
+	//document.addEventListener('mouseup', () => {
+	
+		
+	//	if (document.pointerLockElement === null) $("#info").show();$("#mycartinfo").hide();
+		
+	//});
+	
+	$(document).keyup(function(e) {
+		if (e.key === "x") { // escape key maps to keycode `27`
+			document.exitPointerLock();
+			$("#info").show();
+			$("#mycartinfo").hide();
+			$('#target_point').hide();
+			
+	   }
+	});
+	
+	
+	
+	document.body.addEventListener('mousemove', (event) => {
+	
+		
+		if (document.pointerLockElement === document.body) {
+			
+			
+			
+			$("#navbar").hide();
+				
+			if($('#product_detail_view').is(':visible'))
+			{
+				
+				document.exitPointerLock();
+				
+			}
+	
+			$("#info").hide();
+			
+			$("#target_point").show();
+			
+	
+			camera.rotation.y -= event.movementX / 500;
+			camera.rotation.x -= event.movementY / 500;
+	
+			
+	
+			
+	
+		}
+		else {
+					
+			$('#target_point').hide();
+			
+			if($('.onload').is(':visible'))
+			{
+				$("#navbar").hide();
+			}
+			else{
+				$("#navbar").show();
+			}
+	
+		}
+	
+	
+	});
+	
+	
+	window.addEventListener('resize', onWindowResize);
+	
+	
+	function onWindowResize() {
+	
+		camera.aspect = window.innerWidth / window.innerHeight;
+	
+		// 'ProjectionMatrix' Camera that uses perspective projection. This projection mode is designed to mimic the way the human eye sees. 
+		camera.updateProjectionMatrix();
+	
+		renderer.setSize(window.innerWidth, window.innerHeight);
+	
+	}
+	
+	<%- include('collision/playerCollisions.ejs') %>
+	
+	<%- include('collision/sheresCollision.ejs') %>
+	
+	
+	<%- include('controls/player_controls.ejs') %>
+	
+	<%- include('glft_components/load_items.ejs') %>
+	
+	
+	<%- include('video_components/video_screen.ejs') %>
+	
+		
+	
+	
+	function teleportPlayerIfOob() {
+	
+		
+	
+		if (camera.position.y <= - 25) {
+	
+			
+			playerCollider.start.set(0, 0.35, 0);
+			playerCollider.end.set(0, 1, 0);
+			playerCollider.radius = 0.35;
+			camera.position.copy(playerCollider.end);
+			camera.rotation.set(0, 0, 0);
+	
+		}
+		
+		
+	
+	
+	}
+	
+	console.log(scene.children);
+	
+	
+	// Create an empty array to store the database models
+	var dbModels = [];
+	
+	<% for(var i=0; i<models.length; i++) { %>
+	  // Load the model
+	  <% if(models[i].id) { %>
+		loader.load('../models/gltf/<%= models[i].id %>.glb', function(gltf) {
+		  const model = gltf.scene;
+		//  model.castShadow = true;
+	
+		  
+		  model.traverse(function(child) {
+		if (child.isMesh) {
+		  child.name = "<%= models[i].id %>,<%= models[i].name %>,<%= models[i].description %>,<%= models[i].price_per_item %>,<%= models[i].qty %>,<%= models[i].image %>"; // Assign a specific name to this object
+		   
+			}
+		});
+		  // Set the model's position
+		  model.position.set(<%= models[i].position_x %>,<%= models[i].position_y %>,<%= models[i].position_z %>);
+	
+		  scene.add(model);
+	
+		  // Add the model to the dbModels array
+		  dbModels.push(model);
+		}, undefined, function(error) {
+		  console.error(error);
+		});
+	  <% } %>
+	<% } %>
+
+
+
+	
+	
+	function onMouseClick(event) {
+	
+		if (enableClick === true) {
+	  // Intersect the ray with the scene objects
+	  var intersects = raycaster.intersectObjects(dbModels, true);
+	
+	
+	  if (intersects.length > 0) {
+		const clickedObject = intersects[0].object;
+		let name = findObjectName(clickedObject);
+		
+		$("#mycartinfo").hide();
+		$("#target_point").hide();	
+		$('#product_detail_view').show();
+	
+		var item_name = name.split(",");
+			
+		no_of_item = item_name[4];
+		selected_item_id = item_name[0];
+		selected_item_price = item_name[3];
+		selected_item_name = item_name[1];
+		
+		document.getElementById("item-name").innerHTML =  item_name[1]+"&nbsp;<a target='_blank' href='view_product?id="+item_name[0]+"'><span class='fa fa-eye'></span></a>";
+		document.getElementById("item-desc").innerHTML =  "Category: "+item_name[2];
+		document.getElementById("item-price").innerHTML =  "PKR "+item_name[3];
+		document.getElementById("item-qty").innerHTML =  "Quantity: "+item_name[4];
+		
+		document.getElementById("item-img1").srcset = "../images/product/"+selected_item_id+".png";
+		document.getElementById("item-img2").srcset =  "../images/product/"+selected_item_id+".png";
+		document.getElementById("item-img3").src = "../images/product/"+selected_item_id+".png";
+	
+	  }
+	
+	  }
+	  
+	}
+	
+	
+	
+	
+	
+	function findObjectName(object) {
+	  if (object.name.startsWith('')) {
+		return object.name;
+	  } else if (object.parent) {
+		return findObjectName(object.parent);
+	  } else {
+		return null;
+	  }
+	}
+	
+	
+	
+	
+	window.addEventListener('dblclick', onMouseClick, false);
+	
+	
+	$("#add_item_to_cart_btn").click(function(){
+		var select_no_of_item = parseInt($("#select_no_of_item").val());
+	
+		console.log("no_of_item "+no_of_item+" selected "+select_no_of_item);
+			
+	
+		if(select_no_of_item <=0){
+			
+			document.getElementById('add_item_msg').innerHTML = "<div class='alert alert-danger alert-dismissible fade show' role='alert'>Quantity can't be 0 and less then 0<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
+	   
+		}
+		else if(!(/^\d+$/.test(select_no_of_item))){
+			
+			document.getElementById('add_item_msg').innerHTML = "<div class='alert alert-danger alert-dismissible fade show' role='alert'>Please enter a valid number for quantity.<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
+	   
+		}
+		else if(select_no_of_item > no_of_item){
+			
+			document.getElementById('add_item_msg').innerHTML = "<div class='alert alert-danger alert-dismissible fade show' role='alert'>Selected quantity is greater than available quantity!<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
+		   
+		}
+		else{
+	
+			const itemId = selected_item_id;
+			const itemQty = select_no_of_item;
+			const itemPrice = selected_item_price;
+			const itemName = selected_item_name;
+			// Send an AJAX request to add the item to the cart
+			add_to_cart(itemId,itemQty,itemPrice,itemName);
+	
+			show_cart();
+	
+			console.log("no_of_item "+no_of_item+" selected "+parseInt(document.getElementById("select_no_of_item").value));
+			
+	
+		}
+	});
+	
+	
+	
+	function add_to_cart(itemId,itemQty,itemPrice,itemName){
+		const xhr = new XMLHttpRequest();
+			xhr.open('POST', '/add-to-cart');
+			xhr.setRequestHeader('Content-Type', 'application/json');
+			xhr.onload = function() {
+				if (xhr.status === 200) {
+				// Confirm the item has been added to the cart
+				document.getElementById('add_item_msg').innerHTML = "<div class='alert alert-success alert-dismissible fade show' role='alert'>Item added to the cart<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
+				  
+				setTimeout(function() {
+				// Remove the container element after 2 seconds
+				document.getElementById('add_item_msg').innerHTML = "";
+				document.getElementById("select_no_of_item").value = "1";
+			
+				document.body.requestPointerLock();
+		$("#mycartinfo").show();
+		$("#target_point").show();
+				
+				$("#navbar").hide();
+				$("#product_detail_view").hide();
+		
+
+				}, 2000);
+
+				} else {
+				// Handle the error
+				alert("Failed to add item to cart");
+				}
+			};
+			xhr.send(JSON.stringify({ itemId: itemId, itemQty: itemQty,itemPrice:itemPrice,itemName:itemName }));		
+	}
+
+	
+	
+	
+	function removeFromCart(item_id){
+			const xhr = new XMLHttpRequest();
+			xhr.open('POST', '/remove-to-cart');
+			xhr.setRequestHeader('Content-Type', 'application/json');
+			xhr.onload = function() {
+				if (xhr.status === 200) {
+				// Confirm the item has been added to the cart
+			show_cart();
+				} else {
+				// Handle the error
+				alert("Failed to remove item to cart");
+				}
+			};
+			xhr.send(JSON.stringify({ itemId: item_id }));
+	}
+	
+	
+	function update_cart(itemId,operation){
+		  // Send a request to update the item quantity
+		  $.ajax({
+		  type: 'POST',
+		  url: '/update-cart-quantity',
+		  data: JSON.stringify({ itemId: itemId, operation: operation }),
+		  contentType: 'application/json',
+		  success: function(response) {
+				// Reload the cart items after the quantity has been updated
+				show_cart();
+				
+	
+		},
+	
+		  error: function() {
+			alert('Failed to update item quantity');
+		  }
+		});
+	}
+	
+	function show_cart() {
+		
+		var total_amount_before_discount = 0;
+	  const xhr = new XMLHttpRequest();
+	  xhr.open('GET', '/cart');
+	  xhr.setRequestHeader('Content-Type', 'application/json');
+	  xhr.onload = function() {
+		if (xhr.status === 200) {
+		  const cart = JSON.parse(xhr.responseText);
+		 
+		  document.getElementById("cart_items").innerHTML = "";
+		  var i = 1;
+			for (let index in cart.items) {
+		
+	
+				total_amount_before_discount += parseInt(cart.items[index][1])*parseInt(cart.items[index][0]);
+	
+				console.log(index +" - "+cart.items[index]);
+			document.getElementById("cart_items").innerHTML +="<div class='cart-item'  ><div class='item-num'>"+i+"</div><div class='item-details'><h4>"+cart.items[index][2]+"</h4><div class='item-qty'>Qty: <div class='cart-item-qty'  data-item-id='"+index+"'  style='display:inline-flex;'><button class='qty-btn' id='minus_qty"+index+"' data-operation='minus'>-</button> "+cart.items[index][0]+"<button class='qty-btn' id='add_qty"+index+"' data-operation='plus'>+</button></div></div></div><div class='item-price'>"+parseInt(cart.items[index][1])*parseInt(cart.items[index][0])+"</div><button data-item-id='"+index+"'  class='remove-btn'>&times;</button> </div>";
+		
+				i++;
+	
+				
+				check_qty_limit(index, function(availableQty) {
+						if(cart.items[index][0] ==availableQty){
+							document.getElementById("add_qty"+index).setAttribute("disabled","disabled");
+						}
+						if(cart.items[index][0] == 1){
+							document.getElementById("minus_qty"+index).setAttribute("disabled","disabled");
+						}
+				});
+	
+	
+			}
+	
+	document.getElementById("total_price").innerHTML = total_amount_before_discount;
+	
+	
+	
+			
+	
+	
+	
+		  // Do something with the cart data
+		} else {
+		  alert("Failed to get cart data");
+		}
+	  };
+	  xhr.send();
+	}
+	
+	
+	
+	function check_qty_limit(index, callback){
+	  $.ajax({
+		type: 'POST',
+		url: '/check-qty-limit',
+		data: JSON.stringify({ itemId: index }),
+		contentType: 'application/json',
+		success: function(response) {
+		  // Call the callback function with the availableQty
+		  callback(String(response.availableQty));
+		},
+		error: function() {
+		  console.log('Failed to check item quantity');
+		  // Call the callback function with a default value or error message
+		  callback(null);
+		}
+	  });
+	}
+	
+	
+	
+	$(document).on('click', '.remove-btn', function() {
+		var item_id = $(this).data('item-id');
+	
+		removeFromCart(item_id);
+		
+	});
+	
+	
+	
+	
+	$(document).on('click', '.cart-item-qty button', function() {
+	
+	  var operation = $(this).data('operation');
+		var itemId = $(this).closest('.cart-item-qty').data('item-id');
+	
+	   
+		update_cart(itemId,operation);
+		
+	});
+	
+	
+	
+	
+	
+	/*
+	
+		  // target point
+	
+		  const targetPoint = new THREE.Points(
+			new THREE.BufferGeometry().setFromPoints( [
+			  new THREE.Vector3()
+		  ] ),
+		  new THREE.PointsMaterial( {
+			  size: 1, transparent: true,
+			  map: new THREE.TextureLoader().load(
+				'https://i.imgur.com/HRLtxSe.png'
+			)
+		  } )
+		);
+		camera.target.position.copy( targetPoint );
+	*/
+	
+	
+	
+	function animate() {
+	
+		const deltaTime = Math.min(0.05, clock.getDelta()) / STEPS_PER_FRAME;
+	
+		// we look for collisions in substeps to mitigate the risk of
+		// an object traversing another too quickly for detection.
+		raycaster.set(
+			camera.getWorldPosition(new THREE.Vector3()),
+			camera.getWorldDirection(new THREE.Vector3())
+		  );
+		  scene.remove(arrow);
+		
+		  
+		/*
+		arrow = new THREE.ArrowHelper(
+			raycaster.ray.direction,
+			raycaster.ray.origin,
+			0.5,
+			0x000000
+		  );
+		  scene.add(arrow);
+			*/
+	
+		for (let i = 0; i < STEPS_PER_FRAME; i++) {
+			
+			controls(deltaTime);
+			updatePlayer(deltaTime);
+			updateSpheres(deltaTime);
+			teleportPlayerIfOob();		
+		}
+	
+	
+		if ( video.readyState === video.HAVE_ENOUGH_DATA ) {
+		videoImageContext.drawImage( video, 0, 0, canvasWidth, canvasHeight ); // draw the video with the correct size
+		if ( videoTexture ) 
+		  videoTexture.needsUpdate = true;
+	  }
+	
+	
+	  if ( video2.readyState === video2.HAVE_ENOUGH_DATA ) {
+		videoImageContext2.drawImage( video2, 0, 0, canvasWidth2, canvasHeight2 ); // draw the video with the correct size
+		if ( videoTexture2 ) 
+		  videoTexture2.needsUpdate = true;
+	  }
+	
+	  if ( video3.readyState === video3.HAVE_ENOUGH_DATA ) {
+		videoImageContext3.drawImage( video3, 0, 0, canvasWidth3, canvasHeight3 ); // draw the video with the correct size
+		if ( videoTexture3 ) 
+		  videoTexture3.needsUpdate = true;
+	  }
+	
+	
+		
+		
+		
+		
+	
+		renderer.render(scene, camera);
+	
+		
+	
+		requestAnimationFrame(animate);
+	
+	}
+	
+	
+	
+	
+	
+	
+	</script>
+
+
+
+	</body>
+</html>

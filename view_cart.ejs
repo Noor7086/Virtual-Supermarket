@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>VSM</title>
+		<meta charset=utf-8 />
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link type="text/css" rel="stylesheet" href="main.css">
+
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+		<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+
+
+
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+        <script>
+            var stripePublicKey = '<%= stripePublicKey %>'
+        </script>
+
+		<script type="importmap">
+            {
+                "imports": {
+                    "three": "./build/three.module.js"
+                }
+            }
+        </script>
+
+
+
+		<link  rel="stylesheet" href="css/webStyle.css">
+
+	
+
+	</head>
+	<body class="w3-black" >
+
+
+	
+
+
+		<div id="info">
+
+
+      
+      
+		
+
+			<!-- Icon Bar (Sidebar - hidden on small screens) -->
+			
+			<% var navbarpagelink1 = "/" %>
+			<% var navbarpagelink2 = "/#about" %>
+			<% var navbarpagelink3 = "/#contact" %>
+
+			<%- include('navbar.ejs', {navbarpagelink1: navbarpagelink1,navbarpagelink2: navbarpagelink2,navbarpagelink3: navbarpagelink3}) %>
+
+		
+            <div class="w3-padding-large" id="main" style="background-image: url('images/back.jpg'); ">
+                <!-- Header/Home -->
+                <header class="w3-container w3-padding-32 w3-center" style="background: rgba(0, 0, 0, 0.8);" id="home">
+                  <h1 class="w3-jumbo" id="play" >MA MART</h1>
+                  
+
+			  <!-- Contact Section -->
+			  <div class="w3-padding-64 w3-content w3-text-grey" id="contact" >
+				<h2 class="w3-text-light-grey">Cart</h2>
+
+
+
+
+
+        <!--Start-->
+
+        <section class="h-100 h-custom" >
+          <div class="container h-100 py-5">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+              <div class="col">
+        
+                <div class="table-responsive" id="orders_table">
+                 
+                  <button style="float: right;margin-bottom: 1%;" id="clear_cart" class="btn btn-danger">Clear Cart</button>
+
+                  <table class="table" style="background-color: aliceblue; border-radius: 3%;">
+                   
+                    <thead>
+                      
+                      <tr>
+                        
+                        <th scope="col" class="h5">Shopping Bag</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody id="cart_items">
+                     
+                    
+                    </tbody>
+                   
+                  </table>
+                </div>
+
+
+                <div class="card shadow-2-strong mb-5 mb-lg-0 " id="coupon_section" style="border-radius: 16px;">
+                  <div class="card-body p-4">     
+                    <div class="row">
+                      <div class="col-md-12 col-lg-12 col-xl-12 mb-4 mb-md-0">
+                        <form method="post" id="couponform">   
+                          <div id="showAlert" ></div>                  
+                              <label class="form-label" style="float: left;" >Enter Valid Coupon (Optional)</label>
+                              <input class="form-control" type="text" id="input_coupon" name="input_coupon" id="radioNoLabel1v"
+                                value="" placeholder="XXXXX"  />
+                             
+                                <br>
+                        <div id="applied_coupon" style="display: flex;"></div>
+                              <br>
+                              
+                              <button type="submit"  class="btn btn-dark" style="float: left;">Apply</button>                        
+                        </form>
+
+
+                        
+                        
+
+                      </div>
+                      
+                    </div>
+        
+                  </div>
+                </div>
+
+<!--Order Confirmation Code-->
+<div class="card shadow-2-strong mb-5 mb-lg-0 " id="order_confirmation" style="display: none;border-radius: 16px;">
+  <div class="card-body p-4">     
+    <div class="row">
+      <div class="col-md-12 col-lg-12 col-xl-12 mb-4 mb-md-0">
+       
+
+
+        
+          <div class="row">
+            <div class="jumbotron" style="box-shadow: 2px 2px 4px #000000;">
+              <h2 class="text-center">YOUR ORDER HAS BEEN RECEIVED</h2>
+              <h3 class="text-center">Thank you for your payment, it’s processing</h3>
+        
+              <p class="text-center" >Your order # is: <p id="show_order_number"></p></p>
+              <p class="text-center">You will receive an order confirmation email with details of your order and a link to track your process.</p>
+              <center>
+                <div class="btn-group" style="margin-top:50px;">
+                  <a href="/orders" class="btn btn-lg btn-warning">View Order</a>
+                </div>
+              </center>
+            </div>
+          </div>
+        
+
+        
+        
+
+      </div>
+      
+    </div>
+
+  </div>
+</div>
+
+<!--Order Confirmation Code end-->
+
+
+
+
+
+                <br>
+
+                <div class="card shadow-2-strong mb-5 mb-lg-0 "  id="address_section" style="border-radius: 16px;">
+                  <div class="card-body p-4">     
+                    <div class="row">
+                      <div class="col-md-12 col-lg-12 col-xl-12 mb-4 mb-md-0">
+                                           
+                              <label class="form-label" style="float: left;" >Address</label>
+                              <input class="form-control" type="text" name="input_address" id="input_address" 
+                                value="<%= customer_address %>" placeholder="Enter address"  />
+                              <br>
+                                                      
+                        
+
+                      </div>
+                      
+                    </div>
+        
+                  </div>
+                </div>
+
+                <br>
+
+                <div class="card shadow-2-strong mb-5 mb-lg-0 "  id="anyotherdesc_section" style="border-radius: 16px;">
+                  <div class="card-body p-4">     
+                    <div class="row">
+                      <div class="col-md-12 col-lg-12 col-xl-12 mb-4 mb-md-0">
+                                            
+                              <label class="form-label" style="float: left;" >Any other description (Optional)</label>
+                              <input class="form-control" type="text" name="input_other_description" id="input_other_description" 
+                                value="" placeholder="Enter any other information"  />
+                              <br>
+                                                      
+                        
+
+                      </div>
+                      
+                    </div>
+        
+                  </div>
+                </div>
+
+                <br>
+        
+                <div class="card shadow-2-strong mb-5 mb-lg-0"  id="payment_section" style="border-radius: 16px;">
+                  <div class="card-body p-4">
+        
+                    
+                    <div class="row">
+                      
+                      <div class="col-md-8 col-lg-8 col-xl-8 mb-4 mb-md-0">
+                        
+                        <form>
+
+                          <div class="d-flex flex-row pb-3">
+                            
+                            <label class="form-label" style="float: left;" >Payment method</label>
+                            
+                          </div>
+                   
+
+                          <div class="d-flex flex-row pb-3">
+                            <div class="d-flex align-items-center pe-2">
+                              <input class="form-check-input" type="radio" name="radioNoLabel" id="radiocashdelivery"
+                                value="" aria-label="..." checked onchange="showDiv()" />
+                            </div>
+                            <div class="rounded border w-100 p-3">
+                              <p class="d-flex align-items-center mb-0">
+                                <i class="fa fa-money fa-2x fa-lg text-dark pe-2"></i>Cash on delivery
+                              </p>
+                            </div>
+                          </div>
+
+                                 
+                          <div class="d-flex flex-row pb-3">
+                            
+
+                            <div class="d-flex align-items-center pe-2">
+                              <input class="form-check-input" type="radio" name="radioNoLabel" id="radionayapay"
+                                value="" aria-label="..." onchange="showDiv()"  />
+                            </div>
+                            <div class="rounded border w-100 p-3">
+                              <p class="d-flex align-items-center mb-0">
+                                <i class="fa fa-cc-stripe fa-2x text-dark pe-2"></i>Stripe
+                              </p>
+                            </div>
+
+                            
+                          </div>
+
+
+
+
+
+                        
+                        </form>
+                      </div>
+                     
+                      <div class="col-lg-4 col-xl-3">
+                        <div class="d-flex justify-content-between" style="font-weight: 500;">
+                          <p class="mb-2">Subtotal</p>
+                          <p class="mb-2" id="total_price"></p>
+                        </div>
+        
+                        <div class="d-flex justify-content-between" style="font-weight: 500;">
+                          <p class="mb-0">Delivery</p>
+                          <p class="mb-0" id="delivery_amount">100</p>
+                        </div>
+
+
+                        <div class="d-flex justify-content-between" style="font-weight: 500;">
+                          <p class="mb-0">Coupon discount</p>
+                          <p class="mb-0" id="Coupon_amount"></p>
+                        </div>
+        
+                        <hr class="my-4">
+        
+                        <div class="d-flex justify-content-between mb-4" style="font-weight: 500;">
+                          <p class="mb-2">Total</p>
+                          <p class="mb-2" id="final_total_amount"></p>
+                        </div>
+        
+                        <button type="button" id="checkout_btn" class="btn btn-primary btn-block btn-lg">
+                          <div class="d-flex justify-content-between">
+                            <span>Checkout</span>
+                            <span ></span>
+                          </div>
+                        </button>
+
+                        
+                        <button style="display: none;" id="nayapay-div" type="button" class="btn btn-primary btn-purchase btn-block btn-lg">
+                          <div class="d-flex justify-content-between">
+                            <span>Checkout</span>
+                            <span ></span>
+                          </div>
+                        </button>                          
+                        
+
+        
+                      </div>
+
+                      <div id="address_alert"></div>
+
+                    </div>
+        
+                  </div>
+                </div>
+        
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+      
+
+        <!--End-->
+
+
+
+
+			  <!-- End Contact Section -->
+			  </div>
+
+			  
+			
+			
+			  <%- include('footer.ejs') %>
+			
+			
+			<!-- END PAGE CONTENT -->
+			</div>
+
+			</header>
+	
+
+
+		</div>
+
+
+
+
+    
+  
+    <script>
+      
+      function showDiv() {
+        var radioBtn = document.getElementById("radionayapay");
+        var radiocashdelivery = document.getElementById("radiocashdelivery");
+        var nayapayDiv = document.getElementById("nayapay-div");
+        var checkoutbtn = document.getElementById("checkout_btn");
+        
+    
+        if (radioBtn.checked) {
+          nayapayDiv.style.display = "block";
+          checkoutbtn.style.display = "none";
+        } else {
+          nayapayDiv.style.display = "none";
+          checkoutbtn.style.display = "block";
+        }
+
+        if (radiocashdelivery.checked) {
+          nayapayDiv.style.display = "none";
+          checkoutbtn.style.display = "block";
+        } else {
+          nayapayDiv.style.display = "block";
+          checkoutbtn.style.display = "none";
+        }
+
+      }
+      </script>
+
+
+
+
+
+
+
+			<!-- Modal -->
+
+<!-- SIGN UP FORM -->
+
+<%- include('signin.ejs') %>
+
+
+
+<script src="https://checkout.stripe.com/checkout.js"></script>
+<script>
+
+var total_amount_before_discount = 0;
+
+var discount_amount = 0;
+
+var discount_percentage = 0;
+
+var delivery_amount = 100;
+
+var discount_valid_amount = 0;
+
+var final_total_amount = 0;
+
+
+
+/////////////////Stripe JS Code Start////////////////
+
+  document.getElementsByClassName('btn-purchase')[0].addEventListener('click', function(){
+
+    var input_address = document.getElementById("input_address").value;
+      if(input_address.trim() !== '') {
+
+        purchaseClicked();
+
+      }
+      else{
+
+        document.getElementById("address_alert").innerHTML = "<div class='alert alert-danger alert-dismissible fade show' role='alert'>Enter address<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
+      }
+
+  })
+
+var stripeHandler  =  StripeCheckout.configure({
+    key: stripePublicKey,
+    locale: 'en',
+    token: function(token) {
+
+      var input_address = document.getElementById("input_address").value;
+     var input_other_description = document.getElementById("input_other_description").value;
+
+       fetch('/create-payment-intent',  {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                stripeTokenId: token.id, 
+                address: input_address, other_description: input_other_description, payable_amount: final_total_amount,
+                 }),
+
+            data: JSON.stringify({  address: input_address, other_description: input_other_description, payable_amount: final_total_amount, }),
+        }).then(function(res) {
+
+
+        
+      
+
+      return res.json(); 
+        
+        }).then(function(data) {
+
+          document.getElementById("show_order_number").innerHTML = data.order_number
+          document.getElementById("order_confirmation").style.display = "block"; 
+          document.getElementById("orders_table").style.display = "none"; 
+          document.getElementById("coupon_section").style.display = "none"; 
+          document.getElementById("address_section").style.display = "none"; 
+          document.getElementById("anyotherdesc_section").style.display = "none";
+          document.getElementById("payment_section").style.display = "none";     
+          document.getElementById("checkout_btn").disabled = true;
+          //  alert(data.message)
+           
+
+        }).catch(function(error) {
+
+          document.getElementById("address_alert").innerHTML = "<div class='alert alert-danger alert-dismissible fade show' role='alert'>Failed<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
+ 
+        })
+    }
+})
+
+function purchaseClicked() {
+   
+  stripeHandler.open();
+
+}
+
+
+
+
+
+/////////////////Stripe JS Code End////////////////
+
+
+
+document.getElementById("clear_cart").addEventListener('click',function(){
+
+  const xhr = new XMLHttpRequest();
+  xhr.open('POST', '/clear_cart');
+  xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.onload = function() {
+    if (xhr.status === 200) {
+
+      show_cart();
+
+    }
+    if(xhr.status === 404){
+      alert("not found");
+    }
+  
+  }
+  xhr.send();
+
+});
+
+
+document.getElementById("checkout_btn").addEventListener('click',function(){
+
+  
+  var input_address = document.getElementById("input_address").value;
+  var input_other_description = document.getElementById("input_other_description").value;
+  var radiocashdelivery = document.getElementById("radiocashdelivery");
+
+  if(input_address.trim() !=="" && radiocashdelivery.checked == true){
+    
+    
+    $.ajax({
+      type: 'POST',
+      url: '/place_order_cash_on_delivery',
+      data: JSON.stringify({ address: input_address, other_description: input_other_description,payable_amount:final_total_amount }),
+      contentType: 'application/json',
+	  success: function(response) {
+     
+     
+      //alert(response.message);
+
+      document.getElementById("show_order_number").innerHTML = response.order_number
+
+      document.getElementById("order_confirmation").style.display = "block"; 
+
+document.getElementById("orders_table").style.display = "none"; 
+
+document.getElementById("coupon_section").style.display = "none"; 
+
+document.getElementById("address_section").style.display = "none"; 
+
+document.getElementById("anyotherdesc_section").style.display = "none";
+
+document.getElementById("payment_section").style.display = "none"; 
+     
+
+
+     document.getElementById("checkout_btn").disabled = true;
+
+  
+
+
+	},
+
+      error: function() {
+        alert('Failed to update item quantity');
+      }
+    });
+
+
+
+  }
+  else{
+  document.getElementById("address_alert").innerHTML = "<div class='alert alert-danger alert-dismissible fade show' role='alert'>Enter address<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
+
+  }
+});
+
+
+  
+  function removeFromCart(item_id){
+    	const xhr = new XMLHttpRequest();
+		xhr.open('POST', '/remove-to-cart');
+		xhr.setRequestHeader('Content-Type', 'application/json');
+		xhr.onload = function() {
+			if (xhr.status === 200) {
+			// Confirm the item has been added to the cart
+        show_cart();
+			} else {
+			// Handle the error
+			alert("Failed to remove item to cart");
+			}
+		};
+		xhr.send(JSON.stringify({ itemId: item_id }));
+}
+
+
+
+
+function show_cart() {
+	
+  total_amount_before_discount = 0;
+	
+  const xhr = new XMLHttpRequest();
+  xhr.open('GET', '/cart');
+  xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.onload = function() {
+    if (xhr.status === 200) {
+      const cart = JSON.parse(xhr.responseText);
+	 
+	  document.getElementById("cart_items").innerHTML = "";
+	 
+    
+
+    if(Object.keys(cart.items).length === 0){
+      
+ 
+    document.getElementById("cart_items").innerHTML = "<tr> <th scope='row' style='color:red'>No item in the cart</th> <tr>" 
+      document.getElementById("coupon_section").style.display="none";
+      document.getElementById("address_section").style.display="none";
+      document.getElementById("anyotherdesc_section").style.display="none";
+      document.getElementById("payment_section").style.display="none";
+      document.getElementById("clear_cart").style.display="none";
+      
+
+    }
+
+		for (let index in cart.items) {
+	
+     
+
+			total_amount_before_discount += parseInt(cart.items[index][1])*parseInt(cart.items[index][0]);
+
+			console.log(index +" - "+cart.items[index]);
+	//	document.getElementById("cart_items").innerHTML +="<div class='cart-item'  ><div class='item-num'>"+i+"</div><div class='item-details'><h4>"+cart.items[index][2]+"</h4><div class='item-qty'>Qty: <div class='cart-item-qty'  data-item-id='"+index+"'  style='display:inline-flex;'><button class='qty-btn' data-operation='minus'>-</button> "+cart.items[index][0]+"<button class='qty-btn' id='add_qty"+index+"' data-operation='plus'>+</button></div></div></div><div class='item-price'>"+parseInt(cart.items[index][1])*parseInt(cart.items[index][0])+"</div><button data-item-id='"+index+"'  class='remove-btn'>&times;</button> </div>";
+	
+			
+    document.getElementById("cart_items").innerHTML += `
+    <tr>
+    <th scope='row'>
+      <div class='d-flex align-items-center'>
+        <img src='images/product/`+index+`.png' class='img-fluid rounded-3'
+          style='width: 120px;' alt='Book'>
+        <div class='flex-column ms-4'>
+          <p class='mb-2'>`+cart.items[index][2]+`</p>
+          
+        </div>
+      </div>
+    </th>
+   
+    <td class='align-middle item-qty'>
+      <div class='d-flex flex-row cart-item-qty'  data-item-id='`+index+`' >
+        <button class='btn btn-link px-2 qty-btn' id='minus_qty`+index+`' data-operation='minus'>
+          <i class='fa fa-minus'></i>
+        </button>
+
+        <input id='form1' min='1' name='quantity' value='`+cart.items[index][0]+`' type='number'
+          class='form-control form-control-sm' id='qty_number_Input' style='width: 50px;' onchange='validate_qty_number_Input(this,`+index+`)'  />
+
+        <button class='btn btn-link px-2 qty-btn' id='add_qty`+index+`' data-operation='plus'>
+          <i class='fa fa-plus'></i>
+        </button>
+      </div>
+    </td>
+    <td class='align-middle'>
+      <p class='mb-0' style='font-weight: 500;'>`+parseInt(cart.items[index][1])*parseInt(cart.items[index][0])+`</p>
+    </td>
+    <td class='align-middle'><button data-item-id=`+index+` class='btn-danger remove-btn'>&times;</button></td>
+  </tr>
+    `;
+
+		
+    check_qty_limit(index, function(availableQty) {
+					if(cart.items[index][0] ==availableQty){
+						document.getElementById("add_qty"+index).setAttribute("disabled","disabled");
+					}
+
+          if(cart.items[index][0] == 1){
+						document.getElementById("minus_qty"+index).setAttribute("disabled","disabled");
+					}
+
+
+			});
+
+		
+
+		}
+
+document.getElementById("total_price").innerHTML = total_amount_before_discount;
+
+if(total_amount_before_discount < discount_valid_amount){
+  chk();
+}
+
+discount_amount = (total_amount_before_discount * discount_percentage/100);
+
+document.getElementById("Coupon_amount").innerHTML = "-"+discount_amount;
+
+document.getElementById("delivery_amount").innerHTML = "+"+delivery_amount;
+
+final_total_amount = total_amount_before_discount + delivery_amount - discount_amount;
+
+document.getElementById("final_total_amount").innerHTML = final_total_amount;
+
+
+
+      // Do something with the cart data
+    } else {
+      alert("Failed to get cart data");
+    }
+  };
+  xhr.send();
+}
+
+$(document).on('click', '.remove-btn', function() {
+    var item_id = $(this).data('item-id');
+
+    removeFromCart(item_id);
+    
+});
+
+
+
+function update_cart(itemId,operation){
+      // Send a request to update the item quantity
+      $.ajax({
+      type: 'POST',
+      url: '/update-cart-quantity',
+      data: JSON.stringify({ itemId: itemId, operation: operation }),
+      contentType: 'application/json',
+	  success: function(response) {
+			// Reload the cart items after the quantity has been updated
+			show_cart();
+			
+
+	},
+
+      error: function() {
+        alert('Failed to update item quantity');
+      }
+    });
+}
+
+
+$(document).on('click', '.cart-item-qty button', function() {
+
+var operation = $(this).data('operation');
+  var itemId = $(this).closest('.cart-item-qty').data('item-id');
+
+ 
+  update_cart(itemId,operation);
+  
+});
+
+
+
+function check_qty_limit(index, callback){
+  $.ajax({
+    type: 'POST',
+    url: '/check-qty-limit',
+    data: JSON.stringify({ itemId: index }),
+    contentType: 'application/json',
+    success: function(response) {
+      // Call the callback function with the availableQty
+      callback(String(response.availableQty));
+    },
+    error: function() {
+      console.log('Failed to check item quantity');
+      // Call the callback function with a default value or error message
+      callback(null);
+    }
+  });
+}
+
+
+
+function chk(){
+  $.ajax({
+                method:"GET",
+                url:"/remove_coupon",
+               
+                success:function(result)
+                {
+
+           
+                  document.getElementById("applied_coupon").innerHTML ="";
+                  document.getElementById("input_coupon").value="";
+
+                  discount_amount = 0;
+                  discount_valid_amount = 0;
+
+                  document.getElementById("Coupon_amount").innerHTML = "-"+discount_amount;
+
+                  final_total_amount = total_amount_before_discount + delivery_amount - discount_amount;
+
+                  document.getElementById("final_total_amount").innerHTML = final_total_amount;
+
+                
+                },
+                error: function(jqXHR,textStatus,errorThrow){
+
+                      console.log("Server Error")
+
+                  }    
+            });
+         
+}
+
+
+function check_attach_coupon(){
+
+
+  $.ajax({
+                method:"GET",
+                url:"/check_attach_coupon",
+              
+                success:function(result)
+                {
+                  // `<p><small style="float: left;padding-bottom: 1%;">`+result+`</small></p>`
+
+             if(result.applied_coupon.length > 0){
+
+               
+                    document.getElementById("applied_coupon").innerHTML = `<div class='card'>
+  <strong>Code : `+result.applied_coupon[1]+`&nbsp;&nbsp; <a href="#" onclick='chk()'><i class='fa fa-times'  id='remove_coupon' style='color:red'></i></a> <br> Discount : `+result.applied_coupon[2]+`% <br> Valid at : `+result.applied_coupon[3]+`  </strong>
+</div>`;
+
+
+discount_percentage = parseInt(result.applied_coupon[2]);
+
+discount_amount = (total_amount_before_discount * discount_percentage/100);
+
+discount_valid_amount = result.applied_coupon[5];
+
+document.getElementById("Coupon_amount").innerHTML = "-"+discount_amount;
+
+final_total_amount = total_amount_before_discount + delivery_amount - discount_amount;
+
+document.getElementById("final_total_amount").innerHTML = final_total_amount;
+
+
+             }
+
+                },
+                error: function(jqXHR,textStatus,errorThrow){
+                    document.getElementById("applied_coupon").innerHTML = `<div>
+                        <strong style='color:red'>`+jqXHR.responseText+`</strong>
+                      </div>`;
+
+                      discount_amount= 0;
+                      discount_valid_amount = result.applied_coupon[5];
+                      document.getElementById("Coupon_amount").innerHTML = "-"+discount_amount
+                }    
+            })
+
+}
+
+check_attach_coupon();
+
+  $(document).ready(function () {
+
+    
+          $("#couponform").submit(function (event) {
+            event.preventDefault();
+            const input_coupon = $("#input_coupon").val();
+            const subtotal = total_amount_before_discount;
+           
+            $.ajax({
+                method:"POST",
+                url:"/verify_coupon",
+                data: {input_coupon:input_coupon,subtotal:subtotal},
+                success:function(result)
+                {
+             
+                    document.getElementById("showAlert").innerHTML = `<div class='alert alert-success alert-dismissible fade show' role='alert'>`+result+`<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>`;
+
+                    document.getElementById("input_coupon").value="";
+                    
+check_attach_coupon();
+
+                },
+                error: function(jqXHR,textStatus,errorThrow){
+                    document.getElementById("showAlert").innerHTML =`<div class='alert alert-danger alert-dismissible fade show' role='alert'>`+jqXHR.responseText+`<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>`
+               
+                  }    
+            })
+          });
+        });
+
+
+function validate_qty_number_Input(inputElement,itemId) {
+  if (inputElement) {
+    var inputValue = inputElement.value;
+    
+    if (inputValue <= 0) {
+      inputElement.value = "1";
+    }
+
+    update_by_input_cart(itemId,inputElement.value);
+    
+  }
+}
+
+
+
+
+function update_by_input_cart(itemId,value){
+      // Send a request to update the item quantity
+      $.ajax({
+      type: 'POST',
+      url: '/update_qty_by_input_cart',
+      data: JSON.stringify({ itemId: itemId, value: value }),
+      contentType: 'application/json',
+	  success: function(response) {
+			// Reload the cart items after the quantity has been updated
+			show_cart();
+			
+
+	},
+
+      error: function() {
+        alert('Failed to update item quantity');
+      }
+    });
+}
+
+
+show_cart();
+
+
+</script>
+
+
+		<!-- Import maps polyfill -->
+		<!-- Remove this when import maps will be widely supported -->
+		<script async src="https://unpkg.com/es-module-shims@1.3.6/dist/es-module-shims.js"></script>
+
+
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+
+
+
+
+	</body>
+</html>

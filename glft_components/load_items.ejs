@@ -1,0 +1,37 @@
+loader.load('../models/gltf/mymall2.glb', function(gltf) {
+	scene.add(gltf.scene);
+	worldOctree.fromGraphNode(gltf.scene);
+  
+	gltf.scene.traverse((child) => {
+	  if (child.isMesh) {
+		if (child.material) {
+		  if (child.material.map) {
+			child.material.map.anisotropy = 4;
+		  }
+		}
+	  }
+	});
+  
+	animate();
+  }, undefined, function(error) {
+	alert("Failed to load GLB file: " + error.message);
+  });
+  
+  function loadModel(path, name) {
+	loader.load(path, function(gltf) {
+	  const model = gltf.scene;
+	  model.position.set(0, 0, 0);
+	  model.name = name;
+  
+	  worldOctree.fromGraphNode(gltf.scene);
+	  scene.add(model);
+	}, undefined, function(error) {
+	  alert(name + error);
+	});
+  }
+  
+ 
+  loadModel('../models/gltf/ban.glb', 'ban');
+  loadModel('../models/gltf/fence.glb', 'fence');
+  loadModel('../models/gltf/banners.glb', 'banner');
+  

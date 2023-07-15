@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>VSM</title>
+		<meta charset=utf-8 />
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link type="text/css" rel="stylesheet" href="main.css">
+
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+		<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+ 
+
+
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+		<script type="importmap">
+            {
+                "imports": {
+                    "three": "./build/three.module.js"
+                }
+            }
+        </script>
+
+
+
+		<link  rel="stylesheet" href="css/webStyle.css">
+
+		<style>
+      @import url("https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600&display=swap");
+
+
+
+h2,
+h4,
+h6 {
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+}
+
+.root {
+  padding: 1rem;
+  border-radius: 5px;
+  box-shadow: 0 2rem 6rem rgba(0, 0, 0, 0.3);
+}
+
+figure {
+  display: flex;
+}
+figure img {
+  width: 8rem;
+  height: 8rem;
+  border-radius: 15%;
+  border: 1.5px solid #f05a00;
+  margin-right: 1.5rem;
+  padding: 1rem;
+}
+figure figcaption {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+figure figcaption h4 {
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+figure figcaption h6 {
+  font-size: 1rem;
+  font-weight: 300;
+}
+figure figcaption h2 {
+  font-size: 1.6rem;
+  font-weight: 500;
+}
+
+.order-track {
+  margin-top: 2rem;
+  padding: 0 1rem;
+  border-top: 1px dashed #2c3e50;
+  padding-top: 2.5rem;
+  display: flex;
+  flex-direction: column;
+}
+.order-track-step {
+  display: flex;
+  height: 7rem;
+}
+.order-track-step:last-child {
+  overflow: hidden;
+  height: 4rem;
+}
+.order-track-step:last-child .order-track-status span:last-of-type {
+  display: none;
+}
+.order-track-status {
+  margin-right: 1.5rem;
+  position: relative;
+}
+.order-track-status-dot {
+  display: block;
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50%;
+  background: #f05a00;
+}
+.order-track-status-line {
+  display: block;
+  margin: 0 auto;
+  width: 2px;
+  height: 7rem;
+  background: #f05a00;
+}
+.order-track-text-stat {
+  font-size: 1.3rem;
+  font-weight: 500;
+  margin-bottom: 3px;
+}
+.order-track-text-sub {
+  font-size: 1rem;
+  font-weight: 300;
+}
+
+.order-track {
+  transition: all 0.3s height 0.3s;
+  transform-origin: top center;
+}
+
+
+
+
+.accordion {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  transition: 0.4s;
+}
+
+.active, .accordion:hover {
+  background-color: #ccc; 
+}
+
+.panel {
+  padding: 0 18px;
+  display: none;
+  background-color: white;
+  overflow: hidden;
+}
+
+
+    </style>
+
+	</head>
+	<body class="w3-black" >
+
+
+	
+
+
+		<div id="info">
+		
+
+			<!-- Icon Bar (Sidebar - hidden on small screens) -->
+			
+			<% var navbarpagelink1 = "/" %>
+			<% var navbarpagelink2 = "/#about" %>
+			<% var navbarpagelink3 = "/#contact" %>
+
+			<%- include('navbar.ejs', {navbarpagelink1: navbarpagelink1,navbarpagelink2: navbarpagelink2,navbarpagelink3: navbarpagelink3}) %>
+
+		
+            <div class="w3-padding-large" id="main" style="background-image: url('images/back.jpg'); ">
+                <!-- Header/Home -->
+                <header class="w3-container w3-padding-32 w3-center" style="background: rgba(0, 0, 0, 0.8);" id="home">
+                  <h1 class="w3-jumbo" id="play" >MA MART</h1>
+                  
+
+			  <!-- Contact Section -->
+			  <div class="w3-padding-64 w3-content w3-text-grey" id="contact" >
+				<h2 class="w3-text-light-grey">Orders</h2>
+	
+			
+
+
+        <!--Start-->
+
+        <section class="h-100 h-custom" >
+          <div class="container h-100 py-5">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+              <div class="col">
+        
+               
+
+
+                <div class="card shadow-2-strong mb-5 mb-lg-0 " id="coupon_section" style="border-radius: 16px;">
+                  <div class="card-body p-4">     
+                    <div class="row">
+                      <div class="col-md-12 col-lg-12 col-xl-12 mb-4 mb-md-0">
+                        
+                                           
+                              <h1 class="form-label" >OnProgress Order</h1>
+
+
+                       <% for(var i=0; i<invoices_result.length; i++) { %> 
+                        
+                        <% if(invoices_result[i].status !== 'delivered' && invoices_result[i].status !== 'cancelled' ) { %>
+
+                              <button class="accordion"  onclick="qrcode_func('qrcode<%= invoices_result[i].token %>','<%= invoices_result[i].token %>')" style="border: #ccc solid;" >Order Code: <%= invoices_result[i].token %><br> <p id="accordance_status<%= invoices_result[i].token %>" style="display: flex;"></p>Ordered at: <%= invoices_result[i].created_at %> </button>
+                              <div class="panel">
+                                 <!---->
+                             <section class="root" id="onprogress_order">
+                              <figure>
+                                <img src="images/package-delivery-status-time-icon.png" alt="">
+                                <figcaption>
+                                  <h4 style="display: flex;">Tracking Details</h4>
+                                  <h6 style="display: flex;">Order Number</h6>
+                                  <h2 id="token_no"><%= invoices_result[i].token %></h2>
+                                 
+
+                                </figcaption>
+                              </figure>
+
+                              <h4>Estimated delivery Date time : <% if(invoices_result[i].delivered_datetime) { %> <%= invoices_result[i].delivered_datetime %>  <% } else{ %> Not assigned yet! <% } %></h4>
+                              
+
+                              <div class="order-track">
+                                <div class="order-track-step">
+                                  <div class="order-track-status">
+                                    <span class="order-track-status-dot"></span>
+                                    <span class="order-track-status-line"></span>
+                                  </div>
+                                  <div class="order-track-text">
+                                    <p class="order-track-text-stat" id="onprogress_status<%= invoices_result[i].token %>">Order Processing<!--<i style="color: green;" class="fa fa-check" ></i>--></p>
+                                    
+                                  </div>
+                                </div>
+                                <div class="order-track-step">
+                                  <div class="order-track-status">
+                                    <span class="order-track-status-dot"></span>
+                                    <span class="order-track-status-line"></span>
+                                  </div>
+                                  <div class="order-track-text">
+                                    <p class="order-track-text-stat" id="readytodeliver_status<%= invoices_result[i].token %>">Ready to deliver </p>
+                                    
+                                  </div>
+                                </div>
+                                <div class="order-track-step">
+                                  <div class="order-track-status">
+                                    <span class="order-track-status-dot"></span>
+                                    <span class="order-track-status-line"></span>
+                                  </div>
+                                  <div class="order-track-text">
+                                    <p class="order-track-text-stat" id="pickupbyrider_status<%= invoices_result[i].token %>">Pickup by rider</p>
+                                    
+                                  </div>
+                                </div>
+                                <div class="order-track-step">
+                                  <div class="order-track-status">
+                                    <span class="order-track-status-dot"></span>
+                                    <span class="order-track-status-line"></span>
+                                  </div>
+                                  <div class="order-track-text">
+                                    <p class="order-track-text-stat"> Estimated - <%= invoices_result[i].address %></p>
+                                    
+                                  </div>
+                                </div>
+                              </div>
+
+
+                              <h4>Order Details</h4>
+
+                              <% var subtotal=0; var s_no = 1; %>
+
+
+                                  <table class="table">
+                                    <thead>
+                                      <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Qty</th>
+                                        <th scope="col">Total</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+
+                                      <% for(var j=0; j<order_detail.length; j++) { %>
+
+                                        <% if(order_detail[j].token === invoices_result[i].token  ) { %>
+
+                                          
+                                      <tr>
+                                        <th scope="row"> <%= s_no++; %></th>
+                                        <td><%= order_detail[j].name  %></td>
+                                        <td><%= order_detail[j].qty  %></td>
+                                        <td><%= order_detail[j].total  %></td>
+                                      </tr>
+
+                                      <% subtotal+=order_detail[j].total; %>
+
+                                      <% } %>
+                                      <% } %>
+                                     
+                                    </tbody>
+                                  </table>
+                              
+                                  <div style="text-align: start;display: block;">
+                                 <h5>Subtotal: <%= subtotal %></h5>
+
+                                  <h5>Discount: -<%=  (subtotal/100)*invoices_result[i].coupon_discount; %> ( Applied Coupon : <%=  invoices_result[i].coupon_code; %> )</h5>
+
+                                  <h5>Payable amount: <%=  invoices_result[i].payable_amount; %></h5>
+                                  </div>
+
+                                  <div id="qrcode<%= invoices_result[i].token %>"  class="m-auto"></div>
+
+                            </section>
+                            <!---->
+                              </div>  
+                              
+                              <% } %>
+
+                              <% } %>
+                                          
+                        
+
+                      </div>
+                      
+                    </div>
+        
+                  </div>
+                </div>
+
+                <br>
+
+                <div class="card shadow-2-strong mb-5 mb-lg-0 " id="coupon_section" style="border-radius: 16px;">
+                    <div class="card-body p-4">     
+                      <div class="row">
+                        <div class="col-md-12 col-lg-12 col-xl-12 mb-4 mb-md-0">
+                          
+                                             
+                                <h1 class="form-label" >Previous Orders</h1>
+
+
+                                <% for(var i=0; i<invoices_result.length; i++) { %> 
+                        
+                                  <% if(invoices_result[i].status === 'delivered' || invoices_result[i].status === 'cancelled' ) { %>
+          
+                                        <button class="accordion" onclick="qrcode_func('qrcode<%= invoices_result[i].token %>','<%= invoices_result[i].token %>')"  style="border: #ccc solid;">Order Code: <%= invoices_result[i].token %><br>Status: <%= invoices_result[i].status %><br>Ordered at: <%= invoices_result[i].created_at %></button>
+                                        <div class="panel">
+                                           <!---->
+                                       <section class="root" id="onprogress_order">
+                                        <figure>
+                                          <img src="images/package-delivery-status-time-icon.png" alt="">
+                                          <figcaption>
+                                            <h4 style="display: flex;">Details</h4>
+                                            <h6 style="display: flex;">Order Number</h6>
+                                            <h2 id="token_no"><%= invoices_result[i].token %></h2>
+                                           
+          
+                                          </figcaption>
+                                        </figure>
+          
+                                        <h4>Estimated delivery Date time : <% if(invoices_result[i].delivered_datetime) { %> <%= invoices_result[i].delivered_datetime %>  <% } else{ %> Not assigned yet! <% } %></h4>
+                                        
+          
+                                        <div class="order-track">
+                                         
+                                          <div class="order-track-step" >
+                                            
+                                            <div class="order-track-text" >
+                                              <p class="order-track-text-stat" style="display: flex;"> Address - <%= invoices_result[i].address %></p>
+                                              <p class="order-track-text-stat" style="display: flex;"> Order Status - <%= invoices_result[i].status %></p>
+                                              
+                                            </div>
+
+                                            
+
+                                            
+                                          </div>
+                                          
+                                        </div>
+
+                                        <% var subtotal=0; var s_no = 1; %>
+
+
+          
+                                            <table class="table">
+                                              <thead>
+                                                <tr>
+                                                  <th scope="col">#</th>
+                                                  <th scope="col">Name</th>
+                                                  <th scope="col">Qty</th>
+                                                  <th scope="col">Total</th>
+                                                </tr>
+                                              </thead>
+                                              <tbody>
+
+                                                <% for(var j=0; j<order_detail.length; j++) { %>
+          
+                                                  <% if(order_detail[j].token === invoices_result[i].token  ) { %>
+
+                                                <tr>
+                                                  <th scope="row"> <%= s_no++; %></th>
+                                                  <td><%= order_detail[j].name  %></td>
+                                                  <td><%= order_detail[j].qty  %></td>
+                                                  <td><%= order_detail[j].total  %></td>
+                                                </tr>
+          
+                                                <% subtotal+=order_detail[j].total; %>
+
+                                                <% } %>
+                                                <% } %>
+                                               
+                                              </tbody>
+                                            </table>
+                                         
+                                        <div style="text-align: start;display: block;">
+                                        <h5>Subtotal: <%= subtotal %></h5>
+
+                                        <h5>Discount: -<%=  (subtotal/100)*invoices_result[i].coupon_discount; %> ( Applied Coupon : <%=  invoices_result[i].coupon_code; %> )</h5>
+      
+                                        <h5>Payable amount: <%=  invoices_result[i].payable_amount; %></h5>
+                                      </div>
+ 
+  
+                                      <div id="qrcode<%= invoices_result[i].token %>"  class="m-auto"></div>
+                                       
+                                        <br>
+                                            <button class="btn btn-dark" onclick="renew_order(<%= invoices_result[i].id %>)" style="display: flex;">Renew Order</button>
+                                            <br>
+
+                                      </section>
+                                      <!---->
+                                        </div>  
+                                        
+                                        <% } %>
+          
+                                        <% } %>
+                                                    
+                  
+  
+                        </div>
+                        
+                      </div>
+          
+                    </div>
+                  </div>
+  
+                  <br>
+
+                
+        
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!--End-->
+
+
+
+
+			  <!-- End Contact Section -->
+			  </div>
+
+			  
+			
+			
+			  <%- include('footer.ejs') %>
+			
+			
+			<!-- END PAGE CONTENT -->
+			</div>
+
+			</header>
+	
+
+
+		</div>
+
+
+    <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"
+    integrity="sha512-CNgIRecGo7nphbeZ04Sc13ka07paqdeTu0WR1IM4kNcpmBAUSHSQX0FslNhTDadL4O5SAGapGt4FodqL8My0mA=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  ></script>
+
+    <script>
+      var acc = document.getElementsByClassName("accordion");
+      var i;
+
+
+     function qrcode_func(element_id,data){
+            // Get the canvas element
+      const canvas = document.getElementById(element_id);
+      canvas.innerHTML = "";
+      // Create the QR code instance
+      const qrcode = new QRCode(canvas, {
+        text: data,
+        width: 150,
+        height: 150,
+        colorDark: '#000000',
+        colorLight: '#ffffff',
+        correctLevel: QRCode.CorrectLevel.H
+      });
+    }
+
+
+      for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function() {
+          this.classList.toggle("active");
+          var panel = this.nextElementSibling;
+          if (panel.style.display === "block") {
+            panel.style.display = "none";
+          } else {
+            panel.style.display = "block";
+          }
+        });
+      }
+ 
+      function showDiv() {
+        var radioBtn = document.getElementById("radionayapay");
+        var radiocashdelivery = document.getElementById("radiocashdelivery");
+        var nayapayDiv = document.getElementById("nayapay-div");
+        
+      
+        if (radioBtn.checked) {
+          nayapayDiv.style.display = "block";
+        } else {
+          nayapayDiv.style.display = "none";
+        }
+
+        if (radiocashdelivery.checked) {
+          nayapayDiv.style.display = "none";
+        } else {
+          nayapayDiv.style.display = "block";
+        }
+
+      }
+    
+
+      show_order();
+
+function show_order() {
+	
+ 
+	
+  const xhr = new XMLHttpRequest();
+  xhr.open('GET', '/check_order');
+  xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.onload = function() {
+    if (xhr.status === 200) {
+      const order = JSON.parse(xhr.responseText);
+
+      console.log(order)
+
+
+   
+      for (let index in order.data) {
+
+     
+	
+        document.getElementById("onprogress_status"+order.data[index].token).innerHTML = "On Processing";
+        document.getElementById("readytodeliver_status"+order.data[index].token).innerHTML = "Ready to deliver";
+        document.getElementById("pickupbyrider_status"+order.data[index].token).innerHTML = "Pickup by rider";
+    //	document.getElementById("cart_items").innerHTML +="<div class='cart-item'  ><div class='item-num'>"+i+"</div><div class='item-details'><h4>"+cart.items[index][2]+"</h4><div class='item-qty'>Qty: <div class='cart-item-qty'  data-item-id='"+index+"'  style='display:inline-flex;'><button class='qty-btn' data-operation='minus'>-</button> "+cart.items[index][0]+"<button class='qty-btn' id='add_qty"+index+"' data-operation='plus'>+</button></div></div></div><div class='item-price'>"+parseInt(cart.items[index][1])*parseInt(cart.items[index][0])+"</div><button data-item-id='"+index+"'  class='remove-btn'>&times;</button> </div>";
+    
+   
+        document.getElementById("accordance_status"+order.data[index].token).innerHTML = "Status: "+order.data[index].status;
+     
+
+      if(order.data[index].status === "onprogress"){
+          document.getElementById("onprogress_status"+order.data[index].token).innerHTML += "&nbsp;<i style='color: green;'' class='fa fa-check' ></i>";
+      }
+      if(order.data[index].status === "ready to deliver"){
+          document.getElementById("onprogress_status"+order.data[index].token).innerHTML += "&nbsp;<i style='color: green;'' class='fa fa-check' ></i>";
+          document.getElementById("readytodeliver_status"+order.data[index].token).innerHTML += "&nbsp;<i style='color: green;'' class='fa fa-check' ></i>";
+    
+        }
+
+        if(order.data[index].status === "pickup by rider"){
+          document.getElementById("onprogress_status"+order.data[index].token).innerHTML += "&nbsp;<i style='color: green;'' class='fa fa-check' ></i>";
+          document.getElementById("readytodeliver_status"+order.data[index].token).innerHTML += "&nbsp;<i style='color: green;'' class='fa fa-check' ></i>";
+    
+          document.getElementById("pickupbyrider_status"+order.data[index].token).innerHTML += "&nbsp;<i style='color: green;'' class='fa fa-check' ></i>";
+          
+        }
+
+   
+
+       }
+    }
+
+
+    if(xhr.status === 404){
+      alert("not found");
+    }
+  
+  }
+  xhr.send();
+}  
+
+
+setInterval(function() {
+  show_order();
+}, 3000);
+
+
+
+function renew_order(id) {
+
+  
+	
+  const xhr = new XMLHttpRequest();
+  xhr.open('POST', '/renew_order');
+  xhr.setRequestHeader('Content-Type', 'application/json');
+  xhr.onload = function() {
+    if (xhr.status === 200) {
+      window.location.href = 'view_cart';
+    }
+    if(xhr.status === 404){
+      alert("not found");
+    }
+  
+  }
+  xhr.send(JSON.stringify({id:id}));
+}  
+	
+
+
+
+</script>
+
+
+
+			<!-- Modal -->
+
+<!-- SIGN UP FORM -->
+
+<%- include('signin.ejs') %>
+
+
+
+
+
+
+
+
+		<!-- Import maps polyfill -->
+		<!-- Remove this when import maps will be widely supported -->
+		<script async src="https://unpkg.com/es-module-shims@1.3.6/dist/es-module-shims.js"></script>
+
+    
+
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+
+
+
+
+	</body>
+</html>

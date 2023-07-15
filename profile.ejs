@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>VSM</title>
+		<meta charset=utf-8 />
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link type="text/css" rel="stylesheet" href="main.css">
+
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+		<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+
+
+
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+		<script type="importmap">
+            {
+                "imports": {
+                    "three": "./build/three.module.js"
+                }
+            }
+        </script>
+
+
+
+		<link  rel="stylesheet" href="css/webStyle.css">
+
+		
+
+	</head>
+	<body class="w3-black" >
+
+
+	
+
+
+		<div id="info">
+		
+
+			<!-- Icon Bar (Sidebar - hidden on small screens) -->
+			
+			<% var navbarpagelink1 = "/" %>
+			<% var navbarpagelink2 = "/#about" %>
+			<% var navbarpagelink3 = "/#contact" %>
+
+			<%- include('navbar.ejs', {navbarpagelink1: navbarpagelink1,navbarpagelink2: navbarpagelink2,navbarpagelink3: navbarpagelink3}) %>
+
+		
+            <div class="w3-padding-large" id="main" style="background-image: url('images/back.jpg'); ">
+                <!-- Header/Home -->
+                <header class="w3-container w3-padding-32 w3-center" style="background: rgba(0, 0, 0, 0.8);" id="home">
+                  <h1 class="w3-jumbo" id="play" >MA MART</h1>
+                  
+
+			  <!-- Contact Section -->
+			  <div class="w3-padding-64 w3-content w3-text-grey" id="contact" >
+				<h2 class="w3-text-light-grey">Profile</h2>
+				<hr style="width:200px" class="w3-opacity">
+			
+
+				<div id="alert_response"></div>
+			
+				<form id="signup-form"  target="_blank" style="-webkit-box-shadow: 0 0 10px #fff;box-shadow: 0 0 10px #fff;">
+				  <p><input id="name-input" value="<%= user.name %>" class="w3-input w3-padding-16" type="text" placeholder="Name" required name="Name"></p>
+				  <p><small style="float: left;padding-bottom: 1%;" id="name_status"></small></p>
+				  <p><input id="email-input" value="<%= user.email %>" class="w3-input w3-padding-16" type="email" placeholder="Email" required name="Email"></p>
+				  <p><small style="float: left;padding-bottom: 1%;" id="email_status"></small></p>
+				  <p><input id="contact-input" value="<%= user.contact %>" class="w3-input w3-padding-16" type="number" placeholder="Contact" required name="contact"></p>
+				  <p><small style="float: left;padding-bottom: 1%;" id="contact_status"></small></p>
+				  <p><input id="address-input" value="<%= user.address %>" class="w3-input w3-padding-16" type="text" placeholder="Address" required name="address"></p>
+				  <p>
+					<button class="w3-button w3-light-grey w3-padding-large" type="submit">
+					  <i class="fa fa-edit"></i> Update
+					</button>
+				  </p>
+				</form>
+			  <!-- End Contact Section -->
+			  </div>
+
+			  
+			
+			
+			  <%- include('footer.ejs') %>
+			
+			
+			<!-- END PAGE CONTENT -->
+			</div>
+
+			</header>
+	
+
+
+		</div>
+
+
+
+
+
+
+		<script>
+	
+
+
+			  
+    		$(document).ready(function() {
+
+				$('#contact-input').on('keyup', function() {
+
+					contact_validation();
+
+				});
+
+				$('#name-input').keyup(function() {
+
+					name_validation();
+
+				});
+
+				$('#email-input').keyup(function() {
+					validateEmail();
+				});
+
+				$('#signup-form').submit(function(event) {
+				event.preventDefault();
+				const name = $('#name-input').val();
+				const email = $('#email-input').val();
+				const contact = $('#contact-input').val();
+				const address = $('#address-input').val();
+
+				if(name_validation() && contact_validation() && validateEmail()){
+
+				$.ajax({
+				method: 'POST',
+				url: '/profile',
+				data: { name: name, email: email, contact: contact,address:address },
+				success: function(result) {
+					document.getElementById("alert_response").innerHTML = "<div class='alert alert-success alert-dismissible fade show' role='alert'>"+result+"<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
+					
+					
+				},
+					error: function(jqXHR, textStatus, errorThrown) {
+						document.getElementById("alert_response").innerHTML = "<div class='alert alert-danger alert-dismissible fade show' role='alert'>"+jqXHR.responseText+"<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
+					}
+				});
+
+			}
+
+			});
+
+			});
+
+
+
+			
+			function contact_validation(){
+	    	// Get input value and remove any non-numeric characters
+				let phone = $('#contact-input').val().replace(/\D/g,'');
+			
+			// Check if input is exactly 11 digits long and contains only numbers
+			if (phone.length === 11 && /^\d+$/.test(phone)) {
+			// Valid input, update status
+			$('#contact_status').text('Valid phone number').css('color', 'green');
+			return true;
+			} else {
+			// Invalid input, update status
+			$('#contact_status').text('Invalid phone number').css('color', 'red');
+			return false;
+			
+			}
+ 		 }
+
+
+		  function name_validation(){
+	var nameInput = $('#name-input').val();
+    if (nameInput === '') {
+      $('#name_status').text('Please enter your name').css('color', 'red');
+	  return false;
+    }
+	else if (nameInput.length > 30) {
+      $('#name_status').text('Name length should be less then 30').css('color', 'red');
+	  return false;
+    } 
+	 else if (!/^[a-zA-Z ]+$/.test(nameInput)) {
+      $('#name_status').text('Please enter a valid name').css('color', 'red');
+	  return false;
+    } else {
+      $('#name_status').text('Valid').css('color', 'green');
+	  return true;
+    }
+  }
+
+  function validateEmail() {
+  const email = $('#email-input').val();
+  const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  if (emailRegex.test(email)) {
+    $('#email_status').text('Valid email address.').css('color', 'green');
+	return true;
+  } else {
+    $('#email_status').text('Invalid email address.').css('color', 'red');
+	return false;
+  }
+}
+
+		  </script>
+
+
+
+
+
+
+			<!-- Modal -->
+
+<!-- SIGN UP FORM -->
+
+<%- include('signin.ejs') %>
+
+
+
+
+
+
+		<!-- Import maps polyfill -->
+		<!-- Remove this when import maps will be widely supported -->
+		<script async src="https://unpkg.com/es-module-shims@1.3.6/dist/es-module-shims.js"></script>
+
+
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+
+
+
+
+	</body>
+</html>
